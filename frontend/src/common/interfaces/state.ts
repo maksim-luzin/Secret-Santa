@@ -1,9 +1,9 @@
-import { AuthenticationState } from "../../scenes/Auth/reducer";
-import { SantaState } from "../../scenes/WishList/reducer";
+import { IAuthenticationState } from "../../scenes/Auth/reducer";
+import { ISantaState } from "../../scenes/WishList/reducer";
 
 interface IStoreState {
-  authentication: AuthenticationState;
-  wishList: SantaState;
+  authentication: IAuthenticationState;
+  wish: ISantaState;
 }
 
 export type { IStoreState };
