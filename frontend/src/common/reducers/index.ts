@@ -9,12 +9,12 @@ import santaReducer, {
 
 const initialState: IStoreState = {
   authentication: authenticationInitialState,
-  wishList: santaInitialState,
+  wish: santaInitialState,
 };
 
 const rootReducer = combineReducers({
   authentication: authenticationReducer,
-  wishList: santaReducer,
+  wish: santaReducer,
 });
 
 export { initialState, rootReducer };
