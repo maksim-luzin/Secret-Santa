@@ -3,8 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { Container, Form, Row, Button, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
 import { IValues, IActions } from '../../common/interfaces';
 import { Routes } from '../../../../common/enums';
 import { useAction } from '../../../../common/hooks/useAction';
@@ -29,13 +27,9 @@ const Auth = () => {
       firstName: values.firstName,
       lastName: values.lastName
     }
-    try {
-      await registerUserAction(registrationData)
-      history.push(Routes.PLAY)
-      resetForm()
-    } catch ({ message }) {
-      NotificationManager.error(message, '', 5000);
-    }
+    await registerUserAction(registrationData)
+    history.push(Routes.PLAY)
+    resetForm()
   };
 
   return (
@@ -230,7 +224,6 @@ const Auth = () => {
             </Row>
             <Button type='submit'>Submit</Button>
           </Form>
-          <NotificationContainer />
         </Container>
       )}
     </Formik >

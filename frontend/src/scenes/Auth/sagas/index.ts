@@ -6,11 +6,13 @@ import { registerUserAction } from "../actions";
 
 function* registerUserRequest(action: IAction) {
   try {
-    const { token }: IToken = yield call(registration, action.payload);
+    const { token, id }: IToken = yield call(registration, action.payload);
     setToken(token);
-    yield put(registerUserAction.success({ token }));
-  } catch (error) {
-    yield put(registerUserAction.failure("Failed registration"));
+    yield put(registerUserAction.success({ token, id }));
+  } catch ({ message }) {
+    yield put(
+      registerUserAction.failure((message as string) || "Failed registration")
+    );
   }
 }
 

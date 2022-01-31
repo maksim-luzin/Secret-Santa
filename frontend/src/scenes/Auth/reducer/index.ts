@@ -13,19 +13,21 @@ import {
 
 import { logoutAction } from "../../../common/actions/logout";
 
-export interface AuthenticationState {
+export interface IAuthenticationState {
   isLoading: boolean;
   token: string | null;
+  id: number | null;
   error: string;
 }
 
-export const initialState: AuthenticationState = {
+export const initialState: IAuthenticationState = {
   isLoading: false,
   token: null,
+  id: null,
   error: "",
 };
 
-export const authenticationReducer = createReducer<AuthenticationState>(
+export const authenticationReducer = createReducer<IAuthenticationState>(
   initialState,
   {
     [registerUserAction.TRIGGER](state) {
@@ -39,6 +41,7 @@ export const authenticationReducer = createReducer<AuthenticationState>(
         ...state,
         isLoading: false,
         token: action.payload.token,
+        id: action.payload.id,
       };
     },
     [registerUserAction.FAILURE](state, action: RegisterUserFailureActionType) {
@@ -62,6 +65,7 @@ export const authenticationReducer = createReducer<AuthenticationState>(
         ...state,
         isLoading: false,
         token: action.payload.token,
+        id: action.payload.id,
       };
     },
     [authorizedAction.FAILURE](
@@ -75,11 +79,7 @@ export const authenticationReducer = createReducer<AuthenticationState>(
       };
     },
     [logoutAction.SUCCESS](state) {
-      return {
-        isLoading: false,
-        token: null,
-        error: "",
-      };
+      return { ...initialState };
     },
   }
 );
