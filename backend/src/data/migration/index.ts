@@ -17,7 +17,7 @@ const createGameTable = async () => {
 const createGame = async () => {
   const insert = database.prepare(`INSERT INTO game (id, gameId) VALUES(?, ?)`);
   return new Promise((resolve: (value: void) => void) =>
-    insert.run(1, 10, () => insert.finalize(() => resolve()))
+    insert.run(1, 50, () => insert.finalize(() => resolve()))
   ).catch(() => new Error('User is not created'));
 };
 

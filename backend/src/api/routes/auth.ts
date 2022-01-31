@@ -10,7 +10,7 @@ router.post(
   registrationMiddleware,
   (req: Request, res: Response, next: NextFunction) =>
     register(req.body)
-      .then((token: string) => res.send({ token }))
+      .then((response) => res.send(response))
       .catch(next)
 );
 

@@ -9,7 +9,10 @@ const register = async (userData: ICreateUser) => {
 
   const gameId = await gameRepository.getGameId();
 
-  return createToken(id, gameId);
+  return {
+    id,
+    token: createToken(id, gameId),
+  };
 };
 
 export { register };
