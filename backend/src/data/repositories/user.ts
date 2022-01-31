@@ -32,7 +32,8 @@ class UserRepository {
   getNumberReadyUsers() {
     return new Promise((resolve: (value: number) => void, reject) =>
       this.db.get(
-        'SELECT COUNT(*) AS userReady FROM users WHERE ready=true',
+        'SELECT COUNT(*) AS userReady FROM users WHERE ready = ?',
+        1,
         (err, { userReady }) => {
           if (err) reject(new Error(''));
           return resolve(userReady);
@@ -92,7 +93,7 @@ class UserRepository {
 
   async delete() {
     return new Promise((resolve: (value: void) => void) =>
-      this.db.run('DELETE * FROM users', () => resolve())
+      this.db.run('DELETE FROM users', () => resolve())
     ).catch(() => new Error('Table is not deleted'));
   }
 }
