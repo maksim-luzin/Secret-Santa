@@ -1,12 +1,12 @@
 import { createRoutine } from "redux-saga-routines";
-import { IRegistrationData, IWishData } from "../../../common/interfaces";
+import { IWishData } from "../../../common/interfaces";
 
 export enum SantaActions {
   WISH_LIST = "WISH_LIST",
 }
 
 export const santaAction = createRoutine(SantaActions.WISH_LIST, {
-  trigger: (wishList: IRegistrationData) => wishList,
+  trigger: () => null,
   success: (wishList: IWishData) => wishList,
   failure: (error: string) => error,
 });

@@ -8,19 +8,23 @@ import {
 
 import { logoutAction } from "../../../common/actions/logout";
 
-export interface SantaState {
+export interface ISantaState {
   isLoading: boolean;
-  wishList: IWishData | null;
   error: string;
+  list: IWishData;
 }
 
-export const initialState: SantaState = {
+export const initialState: ISantaState = {
   isLoading: false,
-  wishList: null,
   error: "",
+  list: {
+    firstName: "",
+    lastName: "",
+    wishList: [],
+  },
 };
 
-export const authenticationReducer = createReducer<SantaState>(initialState, {
+export const authenticationReducer = createReducer<ISantaState>(initialState, {
   [santaAction.TRIGGER](state) {
     return {
       ...state,
@@ -31,7 +35,7 @@ export const authenticationReducer = createReducer<SantaState>(initialState, {
     return {
       ...state,
       isLoading: false,
-      wishList: action.payload,
+      list: action.payload,
     };
   },
   [santaAction.FAILURE](state, action: SantaActionFailureActionType) {
@@ -41,11 +45,9 @@ export const authenticationReducer = createReducer<SantaState>(initialState, {
       error: action.payload,
     };
   },
-  [logoutAction.SUCCESS](state) {
+  [logoutAction.SUCCESS]() {
     return {
-      isLoading: false,
-      wishList: null,
-      error: "",
+      ...initialState,
     };
   },
 });

@@ -5,20 +5,22 @@ import { santaAction } from "../actions";
 
 function* santaRequest() {
   try {
-    const wishList: IRegistrationData = yield call(getWishListService);
+    const { firstName, lastName, wishList }: IRegistrationData = yield call(
+      getWishListService
+    );
     const wishListNorm =
-      wishList.wishList !== "number" && wishList.wishList.indexOf("---")
-        ? wishList.wishList.split("---")
-        : [String(wishList.wishList)];
+      wishList !== "number" && wishList.indexOf("---") !== -1
+        ? wishList.split("---")
+        : [String(wishList)];
     yield put(
       santaAction.success({
-        firstName: wishList.firstName,
-        lastName: wishList.lastName,
+        firstName,
+        lastName,
         wishList: wishListNorm,
       })
     );
   } catch (error) {
-    yield put(santaAction.failure("Failed registration"));
+    yield put(santaAction.failure("Failed get wish list"));
   }
 }
 

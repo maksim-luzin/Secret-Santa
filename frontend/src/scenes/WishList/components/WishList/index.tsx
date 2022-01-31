@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from 'react-router-dom';
 import { Loader } from '../../../../common/components/Loader';
 import { Container, Card, ListGroup, Button } from "react-bootstrap";
@@ -10,7 +10,7 @@ import { useTypedSelector } from '../../../../common/hooks/store';
 const WishList = () => {
   const { logoutAction } = useAction();
   const history = useHistory();
-  const wishList = useTypedSelector(({ wishList }) => wishList)
+  const { firstName, lastName, wishList } = useTypedSelector(({ wish: { list } }) => list)
 
   const getNextGame = async () => {
     await logoutAction();
@@ -19,21 +19,21 @@ const WishList = () => {
 
   return (
     <>
-      <Loader isLoading={!Boolean(wishList.firstName)}>
+      <Loader isLoading={!Boolean(firstName)}>
         <Container fluid="md" >
           <Card className="mt-4">
             <Card.Body className="d-flex justify-content-center align-items-center">
-              <Card.Title>Wish list for {wishList.firstName} {wishList.lastName}</Card.Title>
+              <Card.Title>Wish list for {firstName} {lastName}</Card.Title>
             </Card.Body>
             <ListGroup variant="flush">
               {
-                wishList.wishList.map(wish => (
+                wishList.map(wish => (
                   <ListGroup.Item>{wish}</ListGroup.Item>
-                )
+                ))
               }
             </ListGroup>
             <Card.Body>
-              <Button variant="primary" size="lg" onClick={getNextGame}>Play</Button>
+              <Button variant="primary" size="lg" onClick={getNextGame}>Next Game</Button>
             </Card.Body>
           </Card>
         </Container >
