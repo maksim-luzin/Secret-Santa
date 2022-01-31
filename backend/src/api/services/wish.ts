@@ -9,9 +9,9 @@ const wish = async ({ id }: IUser) => {
     santaId
   );
   await userRepository.updateById(id, { ready: false });
-  const users = await userRepository.getAll();
+  const numberReadyUsers = await userRepository.getNumberReadyUsers();
 
-  if (users.every(({ ready }) => ready === false)) {
+  if (!numberReadyUsers) {
     await userRepository.delete();
     await gameRepository.update();
   }

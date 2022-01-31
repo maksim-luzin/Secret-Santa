@@ -8,7 +8,7 @@ const shuffle = async (req: IRequest) => {
 
   const numberReadyUsers = await userRepository.getNumberReadyUsers();
   const numberUsers = await userRepository.getLastId();
-  if (numberUsers < 4 || numberReadyUsers < numberUsers) return;
+  if (numberUsers < 3 || numberReadyUsers < numberUsers) return;
 
   for (let currentId = 1; currentId <= numberUsers; currentId++) {
     const santaId =

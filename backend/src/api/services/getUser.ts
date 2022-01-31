@@ -4,8 +4,8 @@ import { IRequest } from '../../common/interfaces';
 
 const getUser = async (req: IRequest) => {
   const { id } = await userRepository.getById(req.user.id as number);
-  if (id) return true;
-  return false;
+
+  return { id };
 };
 
 export { getUser };
