@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Container, Card, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { playService } from '../../services'
 
 const Play = () => {
   const [isDisabled, setDisabled] = useState(false)
 
   const play = async () => {
-    await play()
+    await playService()
     NotificationManager.success('You have already played! Please wait.');
     setDisabled(true);
   }

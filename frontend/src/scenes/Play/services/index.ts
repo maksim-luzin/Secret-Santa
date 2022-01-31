@@ -1,3 +1,3 @@
-import { play } from "./playService";
+import { playService } from "./playService";
 
-export { play };
+export { playService };
