@@ -7,8 +7,8 @@ function* logoutActionRequest(action: IAction) {
   try {
     setToken("");
     yield put(logoutAction.success());
-  } catch (error) {
-    yield put(logoutAction.failure("Failed registration"));
+  } catch {
+    yield put(logoutAction.failure("Failed logout"));
   }
 }
 
